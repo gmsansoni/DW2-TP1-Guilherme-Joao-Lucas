@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 
 @WebServlet(name = "ServletEntrada", urlPatterns = {"/ServletEntrada"})
 public class ServletEntrada extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,19 +32,20 @@ public class ServletEntrada extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         boolean loginok = (Boolean) request.getSession().getAttribute("loginOk");
          PrintWriter saida = response.getWriter();
+        
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         try{
-            if (loginValido(login)&& senhaValida(senha))
-            saida.println("Login válido!!");
+            if (loginValido(login)&& senhaValida(senha)){
+               saida.println("Login válido!!");
+               request.getSession().setAttribute("loginOk", true);
+            }
         }catch(Exception e){
             saida.println("Login inválido!!");
-            
+            request.getSession().setAttribute("loginOk", false);
         }
-        
-      
-        
     }
       private boolean loginValido(String login){          
           if (login == null){

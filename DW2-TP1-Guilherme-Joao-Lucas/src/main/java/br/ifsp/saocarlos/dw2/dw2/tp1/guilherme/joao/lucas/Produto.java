@@ -5,7 +5,7 @@ package br.ifsp.saocarlos.dw2.dw2.tp1.guilherme.joao.lucas;
  *
  * @author Guilherme - João- Lucas
  */
-public class Produto {
+public class Produto implements Comparable<Produto> {
     private int codigo;
     private String nome, url, descricao;
     private double preco, quant;
@@ -68,6 +68,20 @@ public class Produto {
 
     public void setQuant(double quant) {
         this.quant = quant;
+    }
+
+    @Override
+    public int compareTo(Produto o) {
+        if(this.codigo > o.getCodigo()){
+            return 1;
+        } else{
+            if (this.codigo > o.getCodigo()){
+                return -1;
+            }else{
+                return 0;
+            }
+        }
+                
     }
     
     
