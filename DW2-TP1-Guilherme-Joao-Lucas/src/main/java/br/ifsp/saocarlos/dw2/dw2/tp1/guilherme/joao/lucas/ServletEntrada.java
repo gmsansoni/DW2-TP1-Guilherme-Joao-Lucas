@@ -32,15 +32,21 @@ public class ServletEntrada extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         boolean loginok = (Boolean) request.getSession().getAttribute("loginOk");
+         //boolean loginok = false;
+       // loginok = (Boolean) request.getSession().getAttribute("loginOk");
          PrintWriter saida = response.getWriter();
-        
+       // if (loginok){
+      //      response.sendRedirect("/WEB-INF/cadastroProdutos.jsp");
+      //  }
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         try{
             if (loginValido(login)&& senhaValida(senha)){
+                System.out.println("entrou aqui");
                saida.println("Login válido!!");
                request.getSession().setAttribute("loginOk", true);
+               request.getRequestDispatcher("/WEB-INF/cadastroProdutos.jsp").forward(request, response);
+               //response.sendRedirect("/WEB-INF/cadastroProdutos.jsp");
             }
         }catch(Exception e){
             saida.println("Login inválido!!");
@@ -51,22 +57,18 @@ public class ServletEntrada extends HttpServlet {
           if (login == null){
              return false;
           }
-          if (login.length() < 5 || login.length() < 14){
+          if (login.length() < 5 || login.length() > 14){
             System.out.println("login do tamanho incorreto");
+            System.out.println(login +" "+ login.length());
             return false;
         }
           if(!StringUtils.isAlpha(login.substring(0, 1))){
               System.out.println("login não começa com letra");
               return false;
           }
-          for (int i=1; i< login.length();i++){
-             if(StringUtils.isNumeric(login.substring(i, i+1))){
-                 return true;
-             }
-                          
-          }
           
-         return false; 
+          
+         return true; 
     }
      private boolean senhaValida(String senha){
         if (senha == null){
@@ -76,8 +78,10 @@ public class ServletEntrada extends HttpServlet {
         if (senha.length() < 6){
             System.out.println("Senha do tamanho incorreto");
             return false;
+        }else{
+            return true;
         }
-        return false; 
+        //return false; 
     }
 
 }
