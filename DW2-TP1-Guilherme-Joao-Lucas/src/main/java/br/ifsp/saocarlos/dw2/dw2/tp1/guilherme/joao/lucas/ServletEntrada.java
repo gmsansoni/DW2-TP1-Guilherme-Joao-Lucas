@@ -21,17 +21,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 
-@WebServlet(name = "ServletEntrada", urlPatterns = {"/ServletEntrada"})
+@WebServlet(name = "ServletEntrada", urlPatterns = {"/index.jsp"})
 public class ServletEntrada extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
          //boolean loginok = false;
        // loginok = (Boolean) request.getSession().getAttribute("loginOk");
          PrintWriter saida = response.getWriter();
