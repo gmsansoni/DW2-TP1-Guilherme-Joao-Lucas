@@ -5,29 +5,19 @@ package br.ifsp.saocarlos.dw2.dw2.tp1.guilherme.joao.lucas;
  *
  * @author Guilherme - João- Lucas
  */
-public class Produto implements Comparable<Produto> {
-    private int codigo;
+public class Produto {
     private String nome, url, descricao;
     private double preco, quant;
 
     public Produto() {
     }
 
-    public Produto(int codigo, String nome, String url, String descricao, double preco, double quant) {
-        this.codigo = codigo;
+    public Produto(String nome, String url, String descricao, double preco, double quant) {
         this.nome = nome;
         this.url = url;
         this.descricao = descricao;
         this.preco = preco;
         this.quant = quant;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -70,19 +60,7 @@ public class Produto implements Comparable<Produto> {
         this.quant = quant;
     }
 
-    @Override
-    public int compareTo(Produto o) {
-        if(this.codigo > o.getCodigo()){
-            return 1;
-        } else{
-            if (this.codigo > o.getCodigo()){
-                return -1;
-            }else{
-                return 0;
-            }
-        }
-                
-    }
+    
     
     
 }

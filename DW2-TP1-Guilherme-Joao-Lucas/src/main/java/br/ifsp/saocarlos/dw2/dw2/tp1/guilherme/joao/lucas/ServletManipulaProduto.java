@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Guilherme
  */
-@WebServlet(name = "ServletManipulaProduto", urlPatterns = {"/ServletManipulaProduto"})
+@WebServlet(name = "ServletManipulaProduto", urlPatterns = {"/alteraProduto"})
 public class ServletManipulaProduto extends HttpServlet {
    
           
@@ -23,48 +23,45 @@ public class ServletManipulaProduto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+     request.getRequestDispatcher("/WEB-INF/alteraProduto.jsp").forward(request, response);
+
+        String nome = request.getParameter("nome");
+        String imagem = request.getParameter("url");
+        String descricao = request.getParameter("descricao");
+        String preco = request.getParameter("preco");
+        String quant = request.getParameter("quant");
+
+        response.sendRedirect("index.html");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         try{
             PrintWriter saida = response.getWriter();
             Set<Produto> produtos =(HashSet<Produto>) request.getSession().getAttribute("produtos");
-            Integer codigo = Integer.parseInt(request.getParameter("codigo"));
             String nome = (String) request.getParameter("nome");
             String url = (String) request.getParameter("url");
             String descricao = (String) request.getParameter("descricao");
             Double preco =  Double.parseDouble(request.getParameter("preco"));
             Double quant =  Double.parseDouble(request.getParameter("preco"));
-            Integer novo =(Integer) request.getSession().getAttribute("quant");
-            if (novo ==0){
-                novo=1;
-            };
-            if (codigo == 0){
-                Produto produto = new Produto(novo,nome,url,descricao,preco,quant);
-                produtos.add(produto);
-                request.getSession().setAttribute("novo",novo++);                               
-            }else{
-                for(Produto pro: produtos){
-                    if (pro.getCodigo()== codigo){
-                       pro.setNome(nome);
-                       pro.setDescricao(descricao);
-                       pro.setUrl(url);
-                       pro.setPreco(preco);
-                       pro.setQuant(quant);
-                    }
-                
+            for(Produto pro: produtos){
+                if (nome.equals(pro.getNome())){
+                    pro.setNome(nome);
+                    pro.setDescricao(descricao);
+                    pro.setUrl(url);
+                    pro.setPreco(preco);
+                    pro.setQuant(quant);
                 }
             }
                 
             
-            Produto produto = new Produto();
+          
         }catch (Exception e){
             
         }
-        
+        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
      
     }
 

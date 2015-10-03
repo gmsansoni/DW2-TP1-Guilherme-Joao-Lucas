@@ -14,6 +14,8 @@ package br.ifsp.saocarlos.dw2.dw2.tp1.guilherme.joao.lucas;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,57 +36,39 @@ public class ServletEntrada extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-         //boolean loginok = false;
-       // loginok = (Boolean) request.getSession().getAttribute("loginOk");
-         PrintWriter saida = response.getWriter();
-       // if (loginok){
-      //      response.sendRedirect("/WEB-INF/cadastroProdutos.jsp");
-      //  }
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
+        System.out.println("entrei");
+        
         try{
-            if (loginValido(login)&& senhaValida(senha)){
-                System.out.println("entrou aqui");
-               saida.println("Login válido!!");
-               request.getSession().setAttribute("loginOk", true);
-               request.getRequestDispatcher("/WEB-INF/cadastroProdutos.jsp").forward(request, response);
-               //response.sendRedirect("/WEB-INF/cadastroProdutos.jsp");
+            //PrintWriter saida = response.getWriter();
+            request.getSession().setAttribute("existe", true); 
+            Set<Produto> produtos =(HashSet<Produto>) request.getSession().getAttribute("produtos");
+            if (produtos == null) {
+               produtos = new HashSet<>();
             }
-        }catch(Exception e){
-            saida.println("Login inválido!!");
-            request.getSession().setAttribute("loginOk", false);
+            String nome = (String) request.getParameter("nome");
+            if (nome != null){
+               String url = (String) request.getParameter("url");
+                System.out.println(url);
+               String descricao = (String) request.getParameter("descricao");
+               Double preco =  Double.parseDouble(request.getParameter("preco"));
+               Double quant =  Double.parseDouble(request.getParameter("quant"));
+               Produto produto = new Produto(nome,url,descricao,preco,quant);
+               if (produtos.add(produto)){
+                  request.getSession().setAttribute("existe", true);
+               }else{
+                   request.getSession().setAttribute("existe", false);
+              }
+            }
+            request.getSession().setAttribute("produtos", produtos); 
+            request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+             
+               
+           
+        }catch (Exception e){
+            System.out.println("erro "+e.getMessage());
+            
         }
     }
-      private boolean loginValido(String login){          
-          if (login == null){
-             return false;
-          }
-          if (login.length() < 5 || login.length() > 14){
-            System.out.println("login do tamanho incorreto");
-            System.out.println(login +" "+ login.length());
-            return false;
-        }
-          if(!StringUtils.isAlpha(login.substring(0, 1))){
-              System.out.println("login não começa com letra");
-              return false;
-          }
-          
-          
-         return true; 
-    }
-     private boolean senhaValida(String senha){
-        if (senha == null){
-            System.out.println("Senha nula");
-            return false;
-        }
-        if (senha.length() < 6){
-            System.out.println("Senha do tamanho incorreto");
-            return false;
-        }else{
-            return true;
-        }
-        //return false; 
-    }
+     
 
 }
