@@ -23,7 +23,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="index.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>  Home</a></li>
-                        <li><a href="limpa?invalidate=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  Apagar todos os produtos</a></li>
+                        <li><a href="limpa?limpa=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  Apagar todos os produtos</a></li>
                         <li><a href="exit?getout=true"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>  Sair</a></li>
                     </ul>
                 </li>

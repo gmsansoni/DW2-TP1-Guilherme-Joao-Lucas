@@ -29,7 +29,7 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="index.jsp"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   Principal</a></li>
-                        <li><a href="apagar?invalido=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  Apagar tudo</a></li>
+                        <li><a href="limpa?limpa=true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  Apagar tudo</a></li>
                         <li><a href="saida?sair=true"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>  Sair</a></li>
                     </ul>
                 </li>
