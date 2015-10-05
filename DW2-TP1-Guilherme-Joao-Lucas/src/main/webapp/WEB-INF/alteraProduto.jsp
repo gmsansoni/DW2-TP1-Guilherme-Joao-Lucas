@@ -1,7 +1,7 @@
 <%-- 
     Document   : alterar
     Created on : Oct 2, 2015, 1:17:23 AM
-    Author     : JOAOG
+    Author     : Guilherme João e Lucas
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

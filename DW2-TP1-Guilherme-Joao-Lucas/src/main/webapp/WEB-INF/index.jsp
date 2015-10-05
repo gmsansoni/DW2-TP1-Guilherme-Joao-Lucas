@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 02/10/2015, 23:10:06
-    Author     : Guilherme
+    Author     : Guilherme João e Lucas
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -73,12 +73,6 @@
                     </div>
                 </div>
                 <br/>
-                
-                    <c:choose>
-                        <c:when test="${existe eq true}">
-                          <div class="col-md-6 col-md-offset-3 bg-warning text-center">Produto já existe!!!</div>
-                        </c:when> 
-                    </c:choose>     
                 <br/>
                 <br/>
 

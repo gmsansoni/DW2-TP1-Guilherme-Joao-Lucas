@@ -1,10 +1,13 @@
+/*
+    Trabalho Prático de Desenvolvimento Web 2 (IFSP - ADS, 2015/2)
 
+    Desenvolvido por:
+        Guilherme Mourão Sansoni 120128-X
+        João Antônio Arantes Gonçalves 120062-5
+        Lucas Pepino - 120153-1
+*/
 package br.ifsp.saocarlos.dw2.dw2.tp1.guilherme.joao.lucas;
 
-/**
- *
- * @author Guilherme - João- Lucas
- */
 public class Produto {
     private String nome, url, descricao;
     private double preco, quant;
